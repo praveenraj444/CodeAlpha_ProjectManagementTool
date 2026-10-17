@@ -1,13 +1,18 @@
-# 🚀 TaskFlow — Full-Stack Project Management Tool (Trello / Asana Clone)
+<div align="center">
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
-![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Turso](https://img.shields.io/badge/Turso-Cloud_SQLite-blue?style=for-the-badge)
+# 🚀 TaskFlow - Project Management Tool
+### *A Real-Time Trello / Asana Clone*
 
-TaskFlow is a highly scalable, real-time collaborative project management tool inspired by industry leaders like Trello and Asana. Developed as part of the **CodeAlpha Full Stack Development Internship** (Task 3), this application empowers teams to organize projects, assign tasks, collaborate via comments, and see updates in real-time.
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)](https://socket.io/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Turso](https://img.shields.io/badge/Turso-Cloud_SQLite-blue?style=for-the-badge)](https://turso.tech/)
+
+**Live Demo:** [https://taskflow-frontend-eight-sigma.vercel.app](https://taskflow-frontend-eight-sigma.vercel.app)
+
+</div>
 
 ---
 
@@ -21,15 +26,15 @@ TaskFlow is a highly scalable, real-time collaborative project management tool i
 7. [Environment Variables](#-environment-variables)
 8. [Local Installation & Setup](#-local-installation--setup)
 9. [Deployment](#-deployment)
-10. [Contributors](#-contributors)
+10. [Developer](#-developer)
 
 ---
 
 ## 📌 Project Overview
 
-TaskFlow solves the problem of scattered team communication. Instead of juggling between spreadsheets and chat apps, TaskFlow provides a centralized Kanban board where tasks move seamlessly from **To Do** ➔ **In Progress** ➔ **Done**. 
+**TaskFlow** is a highly scalable, real-time collaborative project management tool inspired by industry leaders like Trello and Asana. Developed as part of the **CodeAlpha Full Stack Development Internship** (Task 3), this application empowers teams to organize projects, assign tasks, collaborate via comments, and see updates in real-time without refreshing the page.
 
-With built-in **Role-Based Access Control (RBAC)** and **Real-Time WebSockets**, multiple users can work on the exact same board simultaneously without needing to refresh the page.
+It is designed with a focus on **data privacy** (Role-Based Access Control) and **real-time responsiveness** (WebSockets), simulating a true production environment.
 
 ---
 
@@ -38,7 +43,7 @@ With built-in **Role-Based Access Control (RBAC)** and **Real-Time WebSockets**,
 ### 🔐 1. Authentication & Security
 - Secure Login / Registration using **JWT (JSON Web Tokens)**.
 - Passwords securely hashed using **bcrypt**.
-- Protected API routes and Socket connections.
+- Protected API routes and strict Socket connection authentication.
 
 ### 📋 2. Collaborative Kanban Boards
 - Create multiple projects.
@@ -49,10 +54,10 @@ With built-in **Role-Based Access Control (RBAC)** and **Real-Time WebSockets**,
 - **Owner:** Full control. Can delete projects, manage members, and edit tasks.
 - **Editor:** Can create, edit, and move tasks, and post comments.
 - **Viewer:** Read-only access. Cannot modify the board or post comments.
-- *Access is strictly enforced on both Frontend UI and Backend APIs.*
+- *Access is strictly enforced on both Frontend UI and Backend Middleware.*
 
 ### 🔗 4. Team Invitation System
-- **Email Invite:** Add registered users directly by email.
+- **Direct Email Invite:** Add registered users directly by email.
 - **Magic Link:** Generate a unique, shareable invite link. Anyone with the link can join the board instantly as an Editor.
 
 ### ⚡ 5. Real-Time Capabilities (Socket.io)
@@ -85,7 +90,7 @@ With built-in **Role-Based Access Control (RBAC)** and **Real-Time WebSockets**,
 
 ## 🗄️ Database Schema
 
-TaskFlow uses 5 relational tables (Turso/libSQL):
+TaskFlow uses a relational schema (Turso/libSQL) consisting of 7 tables:
 
 1. **`users`**: `id`, `name`, `email` (unique), `password` (hashed), `created_at`.
 2. **`projects`**: `id`, `name`, `description`, `owner_id` (FK), `created_at`.
@@ -161,3 +166,56 @@ TURSO_DATABASE_URL=libsql://your-database-url.turso.io
 TURSO_AUTH_TOKEN=your-turso-auth-token
 JWT_SECRET=your_super_secret_jwt_key
 CLIENT_URL=http://localhost:5173
+
+**2. Frontend ('client/.env')**
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_SOCKET_URL=http://localhost:5000
+
+** 💻 Local Installation & Setup
+ - Prerequisites
+ - Node.js (v18+)
+
+ - npm or yarn
+
+ - A Turso Database account
+
+  Step 1: Clone the repository
+
+  git clone https://github.com/praveenraj444/CodeAlpha_ProjectManagementTool.git
+  cd CodeAlpha_ProjectManagementTool
+
+  Step 2: Setup Backend
+
+  cd server
+  npm install
+  # Create .env file and fill in Turso credentials and JWT Secret
+  npm run dev
+
+  Step 3: Setup Frontend
+
+  # Open a new terminal
+  cd client
+  npm install
+  # Create .env file
+  npm run dev
+
+ ** 🚀 Deployment
+
+  This application is configured for easy deployment.
+
+  Frontend: Hosted on Vercel (configured via client folder).
+
+  Backend: Hosted on Render (Node.js web service via server folder).
+
+  Database: Hosted on Turso.
+
+Make sure to update CLIENT_URL in the Render backend dashboard after deploying the frontend to Vercel to prevent CORS errors.
+
+** 👨‍💻 Developer
+
+**[Your Name]**
+- GitHub: [@praveenraj444](https://github.com/praveenraj444)
+- LinkedIn: [Praveenraj M](https://linkedin.com/in/praveenrajm2021)
+
+---
